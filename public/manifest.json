@@ -1,0 +1,29 @@
+{
+    "name": "Nutri-Star",
+    "display_override": ["window-control-overlay", "minimal-ui"],
+    "display": "minimal-ui",
+    "description": "Compress and compare images with different codecs right in your browser.",
+    "start_url": "127.0.0.1:8000",
+    "icons": [
+        {
+            "src": "/images/icons/icon-144x144.png",
+            "sizes": "144x144"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/images/icons/splash-640x1136.png",
+            "sizes": "640x1136",
+            "type": "image/png",
+            "form_factor": "narrow",
+            "label": "TEsting"
+        },
+        {
+            "src": "/images/icons/splash-640x1136.png",
+            "sizes": "640x1136",
+            "type": "image/png",
+            "form_factor": "wide",
+            "label": "TEsting"
+        }
+    ]
+}
