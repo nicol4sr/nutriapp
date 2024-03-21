@@ -26,7 +26,8 @@ class ProfileRequest extends FormRequest
         return [
             'name' => ['required', 'string'],
             'email' => ['required', 'email'],
-            // 'foto' => ['required', 'string'],
+            // 'old_password' => ['required', 'string', 'min:4', 'confirmed'],
+            // 'new_password' => ['required', 'string', 'min:4', 'confirmed', 'different:old_password'],
         ];
     }
 }

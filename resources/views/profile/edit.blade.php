@@ -76,6 +76,40 @@
                                 </div>
                             </div>
 
+                            {{-- <div class="row mb-3 justify-content-center text-center">
+                                <label>Contraseña anterior</label>
+                                <div class="col-12">
+                                    <div class="input-group mt-3">
+                                        <input type="password" name="old_password"
+                                            class="form-control @error('old_password') is-invalid @enderror"
+                                            placeholder="*********">
+
+                                        @error('old_password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3 justify-content-center text-center">
+                                <label>Nueva contraseña</label>
+                                <div class="col-12">
+                                    <div class="input-group mt-3">
+                                        <input type="password" name="new_password"
+                                            class="form-control @error('new_password') is-invalid @enderror"
+                                            placeholder="*********">
+
+                                        @error('new_password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div> --}}
+
                             <div class="row mb-3 text-center">
                                 <button type="submit" class="btn btn-primary">Actualizar</button>
                             </div>

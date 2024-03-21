@@ -6,6 +6,7 @@ use App\Http\Requests\ProfileRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class PerfilController extends Controller
@@ -31,11 +32,8 @@ class PerfilController extends Controller
 
         $usuario = User::find($usuario->id);
 
-        // dd($usuario);
-
         $validado = $request->validated();
-
-        // dd($validado);
+        // $contrasena = Hash::make($request['new_password']);
         $usuario->update($validado + ['foto' => substr($path, 9)]);
 
         return redirect()->back();
