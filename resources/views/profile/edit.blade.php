@@ -28,15 +28,12 @@
                     <div class="card">
                         <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-                            <img src="{{ asset('images/users/profile_0.png') }}" id="preview" alt="Profile"
-                                class="rounded-circle">
-                            <img
-                                src="{{ $usuario->foto == null ? asset('images/users/profile_0.png') : asset('storage/imagenes/' . $usuario->foto) }}">
+                            <img src="{{ $usuario->foto == null ? asset('images/users/profile_0.png') : asset('storage/imagenes/' . $usuario->foto) }}"
+                                id="preview" alt="Profile" class="rounded-circle">
                             <div class="input-group mb-3">
-                                <div class="custom-file">
+                                <div class="mx-auto custom-file">
                                     <input class="upload" type="file" name="foto"
                                         accept="image/png, image/jpeg, image/jpg" onchange="loadImage(event)">
-                                    <label class="custom-file-label" for="foto">Choose file</label>
                                 </div>
                             </div>
                             @error('foto')

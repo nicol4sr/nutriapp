@@ -15,7 +15,8 @@
                 <div class="card">
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-                        <img src="{{ asset('images/users/profile_2.png') }}" alt="Profile" class="rounded-circle">
+                        <img src="{{ $usuario->foto == null ? asset('images/users/profile_0.png') : asset('storage/imagenes/' . $usuario->foto) }}"
+                            alt="Profile" class="rounded-circle">
                         <div class="row mb-3 text-center">
                             <div class="col-sm-12">
                                 <a href="{{ route('editar-perfil') }}" class="btn btn-primary">Actualizar perfil</a>
