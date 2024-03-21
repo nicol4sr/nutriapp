@@ -15,8 +15,15 @@ class UsuarioSeeder extends Seeder
      */
     public function run()
     {
-        $rol_admin = Rol::find(1)->id;
-        $rol_entrenador = Rol::find(2)->id;
+        $rol_admin = Rol::where('rol', '=', 'Administrador')->first()->id;
+        $rol_entrenador = Rol::where('rol', '=', 'Entrenador')->first()->id;
+
+        $sistema = [
+            'name' => 'Sistema',
+            'email' => 'sistem_admin@email.com',
+            'rol_id' => $rol_admin,
+            'password' => bcrypt('admin')
+        ];
 
         $admin = [
             'name' => 'Admin',
@@ -40,6 +47,7 @@ class UsuarioSeeder extends Seeder
             ],
         ];
 
+        User::create($sistema);
         User::create($admin);
 
         foreach ($entrenadores as $entrenador) {

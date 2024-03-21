@@ -22,11 +22,21 @@
 
         <nav>
             <!-- <ol class="breadcrumb">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                 <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
-                                                                                                                                                                                                                                                                                                                                                                                                                                               </ol> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                             <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                           </ol> -->
         </nav>
     </div>
     <h1>Crear Receta Nutricional</h1>
+
+    <section class="section">
+        <div class="row">
+            <div class="col-4 mb-4">
+                <a href="{{ route('receta') }}" class="btn btn-primary w-50"> <i class="bi bi-arrow-left">
+                    </i>Regresar</a>
+            </div>
+        </div>
+        <br>
+    </section>
     <section class="section">
 
         <!-- Left side columns -->

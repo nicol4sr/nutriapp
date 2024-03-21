@@ -17,18 +17,17 @@ class CreateDatosTable extends Migration
             $table->id();
             $table->unsignedBigInteger('usuario_id');
             $table->foreign('usuario_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('objetivo');
-            $table->string('habitos');
-            $table->string('genero');
-            $table->string('pesoi');
-            $table->string('pesoa');
-            $table->string('altura');
-            $table->string('imc');
+            $table->unsignedBigInteger('nacionalidad_id');
+            $table->foreign('nacionalidad_id')->references('id')->on('nacionalidades')->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedBigInteger('objetivo_id');
+            $table->foreign('objetivo_id')->references('id')->on('tipos')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('habitos');
+            $table->boolean('genero');
+            $table->float('peso');
+            $table->float('altura');
             $table->string('discapacidad');
             $table->string('alergia');
-            $table->unsignedBigInteger('nacionalidad');
-            $table->foreign('nacionalidad')->references('id')->on('nacionalidades')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('edad');
+            $table->datetime('nacimiento');
             $table->timestamps();
         });
     }

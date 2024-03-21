@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ConfiguracionController;
 use App\Http\Controllers\entrenadoresController;
 use App\Http\Controllers\nutricionistasController;
 use App\Http\Controllers\PlanesController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\datosController;
 use App\Http\Controllers\EspecialistaController;
 use App\Http\Controllers\ReferenciaController;
 use App\Http\Controllers\nacionalidadController;
+use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\RecetarioController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -31,10 +33,6 @@ Route::get('/', function () {
 })->middleware('auth')->name('home');
 
 Auth::routes();
-
-Route::get('/perfil', function () {
-    return view('profile.profile');
-})->name('perfil');
 
 // Ejercicios
 Route::controller(EjercicioController::class)->group(function () {
@@ -60,29 +58,35 @@ Route::controller(RecetaController::class)->group(function () {
     Route::delete('/receta/{id}/delete', 'delete')->name('borrar-receta');
     Route::get('/planes-nutricionales', 'planes_nutricionales')->name('listado-planes');
     Route::get('/planes-nutricionales/publico/{tipo}', 'ver_plan')->name('ver-planes');
+    Route::get('/planes-nutricionales/personal', 'personal')->name('mis-planes');
 });
 
 
-Route::get('/logros', function () {
-    return view('estadisticas.logros_metas');
-})->name('logros');
+// Route::get('/logros', function () {
+//     return view('estadisticas.logros_metas');
+// })->name('logros');
 
 
 Route::controller(ReferenciaController::class)->group(function () {
     Route::get('/tabla', 'index')->name('valor_nutricional');
+});
+Route::controller(PerfilController::class)->group(function () {
+    Route::get('/perfil', 'index')->name('perfil');
+    Route::get('/perfil/editar', 'edit')->name('editar-perfil');
+    Route::put('/perfil/actualizar', 'update')->name('actualizar-perfil');
 });
 
 Route::get('/consultas', function () {
     return view('consulta.consultas');
 })->name('consultas');
 
-Route::get('/entrenamiento', function () {
-    return view('estadisticas.entrenamiento');
-})->name('entrenamiento');
+// Route::get('/entrenamiento', function () {
+//     return view('estadisticas.entrenamiento');
+// })->name('entrenamiento');
 
-Route::get('/peso', function () {
-    return view('estadisticas.peso');
-})->name('peso');
+Route::controller(ConfiguracionController::class)->group(function () {
+    Route::get('/peso', 'index')->name('peso');
+});
 
 
 Route::get('/alarma', function () {
@@ -90,24 +94,26 @@ Route::get('/alarma', function () {
 })->name('alarma');
 
 
-Route::get('/cuenta', function () {
-    return view('configuracion.cuenta');
-})->name('cuenta');
+// Route::get('/cuenta', function () {
+//     return view('configuracion.cuenta');
+// })->name('cuenta');
 
 Route::controller(datosController::class)->group(function () {
 
-    Route::get('/datos', 'new')->name('datos');
-    Route::get('/crear-datos', 'create')->name('crear-datos');
+    Route::get('/datos', 'index')->name('datos');
+    Route::get('/datos/registrar', 'create')->name('registrar-datos');
     Route::post('/datos/store', 'store')->name('guardar-datos');
-    Route::get('/edit', 'index')->name('edit');
+    Route::get('/datos/{datos}/editar', 'edit')->name('editar-datos');
+    Route::put('/datos/{datos}/actualizar', 'update')->name('actualizar-datos');
+    // Route::get('/edit', 'index')->name('edit');
     Route::get('/profile/show', 'newt')->name('datost');
-    Route::get('/peso', 'show')->name('peso');
+    // Route::get('/peso', 'show')->name('peso');
 });
 
 // Si hay varias rutas que usan el mismo controlador es mejor agruparlas con el metodo Route::controller
 // Las rutas deben llevar / al inicio
-Route::get('editar/{datos}/editar', [datosController::class, 'editar'])->name('editar.d');
-Route::put('editar/{datos}', [datosController::class, 'update'])->name('actualizar.d');
+// Route::get('editar/{datos}/editar', [datosController::class, 'editar'])->name('editar.d');
+// Route::put('editar/{datos}', [datosController::class, 'update'])->name('actualizar.d');
 
 
 
@@ -137,8 +143,8 @@ Route::controller(nutricionistasController::class)->group(function () {
     Route::post('/nutricionistas/store', 'store')->name('guardar-n');
 });
 
-Route::controller(nacionalidadController::class)->group(function () {
+// Route::controller(nacionalidadController::class)->group(function () {
 
-    Route::get('/pais', 'index')->name('pais');
-    Route::get('/datos', 'seleccion')->name('datos');
-});
+//     Route::get('/pais', 'index')->name('pais');
+//     Route::get('/datos', 'seleccion')->name('datos');
+// });

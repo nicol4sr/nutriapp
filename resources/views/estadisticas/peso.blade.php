@@ -1,19 +1,64 @@
 @extends('layouts.app')
 
-@section('title', 'Editar d.físicos')
+@section('title', 'Editar datos físicos')
 
 @section('css')
     <link href="css/reco.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.7.0/css/select.dataTables.min.css">
-    <link rel="stylesheet" href="https://code.highcharts.com/css/highcharts.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/searchpanes/2.2.0/css/searchPanes.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.7.0/css/select.dataTables.min.css ">
 @endsection
 
+@section('js')
+    <script src="{{ asset('/js/calc.js') }}"></script>
+    <script src="{{ asset('/js/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ asset('/plugins/apexcharts/apexcharts.min.js') }}"></script>
+
+    <script>
+        const values = @json($datos);
+        const options = {
+            chart: {
+                height: 280,
+                type: "area"
+            },
+            dataLabels: {
+                enabled: false
+            },
+            series: [{
+                name: "Peso deseado",
+                data: values.map(v => v.peso)
+            }],
+            title: {
+                text: 'Histórico de pesos',
+                align: 'center'
+            },
+            fill: {
+                type: "gradient",
+                gradient: {
+                    shadeIntensity: 1,
+                    opacityFrom: 0.7,
+                    opacityTo: 0.9,
+                    stops: [0, 90, 100]
+                }
+            },
+            xaxis: {
+                type: 'datetime',
+                categories: values.map(v => v.created_at),
+                labels: {
+                    show: false,
+                }
+            },
+            tooltip: {
+                x: {
+                    format: 'dd/MM/yy hh:mm tt'
+                }
+            }
+        };
+
+        const chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+    </script>
+@endsection
 
 @section('content')
-    <section class="">
+    <section class="mb-5">
         <div class="row">
 
             <div class="pagetitle">
@@ -27,10 +72,10 @@
 
             <section class="section">
                 <div class="row">
-                    <div class="col-lg-6">
-                        <div class="card">
+                    <div class="col-12 mb-5">
+                        <div class="card" style="height: 100%">
                             <div class="card-body ">
-                                <div id="demo-output" style="margin-bottom: 1em; " class="chart-display " ></div>
+                                <div id="chart" style="margin-bottom: 1em; " class="chart-display "></div>
 
                                 <!-- Bar Chart -->
 
@@ -41,28 +86,22 @@
                     </div>
 
 
-                    <div class="col-lg-6">
-                        <div class="card">
+                    <div class="col-12 mb-5">
+                        <div style="height: 100%" class="card">
                             <div class="card-body">
                                 <div class="table-responsive ">
-                                    <table class="table-primary" id="example" >
-                                        <thead class="table-primary" >
+                                    <table class="table" id="example">
+                                        <thead>
                                             <tr>
-
-
                                                 <th scope="col">Peso</th>
                                                 <th scope="col">Actualizacion</th>
-                                                <th scope="col">Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($datos as $datos)
                                                 <tr>
-                                                    <td>{{ $datos->pesoi }}</td>
-                                                    <td>{{ $datos->created_at }}</td>
-                                                    <td><a href="{{ route('editar.d', $datos) }}"
-                                                            class="btn btn-primary active" role="button"
-                                                            aria-pressed="true">Actualizar</a></td>
+                                                    <td>{{ $datos->peso }}</td>
+                                                    <td>{{ date('d-m-Y', strtotime($datos->created_at)) }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -79,10 +118,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Calculadora IMC</h5>
+                                <h5 class="card-title">Calculadora De Indice de Masa Corporal</h5>
                                 <div class="row">
                                     <div class="from-group mb-2">
                                         <label for="kg">Ingrese Peso (kg):</label>
@@ -127,59 +166,4 @@
     </section>
 
 
-@section('js')
-
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/searchpanes/2.2.0/js/dataTables.searchPanes.min.js"></script>
-
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script>
-    <script>
-        const table = new DataTable('#example');
-
-
-        // Create chart
-        const chart = Highcharts.chart('demo-output', {
-            chart: {
-                type: 'pie',
-                styledMode: true
-            },
-            title: {
-                text: 'Bitacora de peso'
-            },
-            series: [{
-                data: chartData(table)
-            }]
-        });
-
-        // On each draw, update the data in the chart
-        table.on('draw', function() {
-            chart.series[0].setData(chartData(table));
-        });
-
-        function chartData(table) {
-            var counts = {};
-
-            // Count the number of entries for each position
-            table
-                .column(0, {
-                    search: 'applied'
-                })
-                .data()
-                .each(function(val) {
-                    if (counts[val]) {
-                        counts[val] += 1;
-                    } else {
-                        counts[val] = 1;
-                    }
-                });
-
-            return Object.entries(counts).map((e) => ({
-                name: e[0],
-                y: e[1]
-            }));
-        }
-    </script>
-@endsection
 @endsection

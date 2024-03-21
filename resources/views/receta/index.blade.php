@@ -16,18 +16,13 @@
         </nav>
     </div><!-- End Page Title -->
 
-    <section class="section">
-        <div class="row">
-            <div class="col-lg-8" style="margin:2px">
-                <a href="{{ route('crear-receta') }}" class="btn btn-primary w-25">
-                    <i class="bi bi-plus"> </i>Crear
-                </a>
-            </div>
-        </div>
-        <br>
-    </section>
+    <div class="col-4 mb-4">
+        <a href="{{ route('crear-receta') }}" class="btn btn-primary w-50">
+            <i class="bi bi-plus"> </i>Crear
+        </a>
+    </div>
 
-    <section class="section dashboard">
+    <section class="section dashboard mb-5">
         <div class="row ">
             <div class="col-lg-11">
 
@@ -43,9 +38,9 @@
                                 <th scope="col">Tipo</th>
                                 <th scope="col">Comida</th>
                                 <!-- <th scope="col">Calorias</th>
-                                    <th scope="col">Hc</th>
-                                    <th scope="col">Proteinas</th>
-                                    <th scope="col">Grasas</th> -->
+                                                                                                <th scope="col">Hc</th>
+                                                                                                <th scope="col">Proteinas</th>
+                                                                                                <th scope="col">Grasas</th> -->
                                 <th scope="col">Acciones</th>
                             </tr>
                         </thead>
@@ -72,16 +67,17 @@
                                             $totalGrasas += $alimento->grasas;
                                         }
                                     @endphp
-                                        <td>{{ $totalCalorias }}</td>
-                                        <td>{{ $totalHc }}</td>
-                                        <td>{{ $totalProteinas }}</td>
-                                        <td>{{ $totalGrasas }}</td> -->
-                                    <td class="d-flex">
+                                                                                                    <td>{{ $totalCalorias }}</td>
+                                                                                                    <td>{{ $totalHc }}</td>
+                                                                                                    <td>{{ $totalProteinas }}</td>
+                                                                                                    <td>{{ $totalGrasas }}</td> -->
+                                    <td class="btn-group">
                                         <a type="button" href="{{ route('ver-receta', $receta->id) }}"
                                             class="btn btn-primary">Ver</a>
                                         <a type="button" href="{{ route('editar-receta', $receta->id) }}"
                                             class="btn btn-warning">Editar</a>
-                                        <form action="{{ route('borrar-receta', $receta->id) }}" method="POST">
+                                        <form action="{{ route('borrar-receta', $receta->id) }}" method="POST"
+                                            class="btn-group">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger">Borrar</button>
@@ -95,11 +91,7 @@
 
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Anterior</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Siguente</a></li>
+                            {{ $recetas->links() }}
                         </ul>
                     </nav><!-- End Basic Pagination -->
 

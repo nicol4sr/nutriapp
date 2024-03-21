@@ -11,10 +11,17 @@ use Illuminate\Support\Facades\Auth;
 
 class RecetaController extends Controller
 {
+    public function __construct()
+    {
+        // Valida la autenticación
+        $this->middleware('auth');
+        $this->middleware('prevent-back-history');
+    }
+
     public function index()
     {
         $usuario = auth()->user()->id;
-        $recetas = Receta::where('usuario_id', '=', $usuario)->get();
+        $recetas = Receta::where('usuario_id', '=', $usuario)->paginate(15);
 
         return view('receta.index', compact('recetas'));
     }
@@ -81,13 +88,14 @@ class RecetaController extends Controller
         return view('planes.nutricional.index', compact('tipos'));
     }
 
-    public function ver_plan(Tipo $tipo) {
+    public function ver_plan(Tipo $tipo)
+    {
         if ($tipo == null) {
             return redirect('/planes-nutricionales');
         }
 
         $usuario = auth()->user()->id;
-        $planes = Receta::where('tipo_id', '=', $tipo->id)->where('usuario_id', '!=', $usuario)->get();
+        $planes = Receta::where('tipo_id', '=', $tipo->id)->where('usuario_id', '!=', $usuario)->paginate(15);
         return view('planes.nutricional.list', compact('planes', 'tipo'));
     }
 }

@@ -57,16 +57,16 @@
                 <i class="bi bi-graph-up-arrow"></i><span>Estadisticas</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li class="dropdown-item">
+                {{-- <li class="dropdown-item">
                     <a href="{{ route('logros') }}">
                         <i class="bi bi-circle"></i><span class="dropdown-item-color">Logros y Metas</span>
                     </a>
-                </li>
-                <li class="dropdown-item">
+                </li> --}}
+                {{-- <li class="dropdown-item">
                     <a href="{{ route('entrenamiento') }}">
                         <i class="bi bi-circle"></i><span class="dropdown-item-color">Entrenamiento</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="dropdown-item">
                     <a href="{{ route('peso') }}">
                         <i class="bi bi-circle"></i><span class="dropdown-item-color">Peso</span>
@@ -94,18 +94,8 @@
                     </a>
                 </li>
                 <li class="dropdown-item">
-                    <a href="{{ route('cuenta') }}">
-                        <i class="bi bi-circle"></i><span class="dropdown-item-color">Configuarar Cuenta</span>
-                    </a>
-                </li>
-                <li class="dropdown-item">
                     <a href="{{ route('datos') }}">
                         <i class="bi bi-circle"></i><span class="dropdown-item-color">Datos fisicos</span>
-                    </a>
-                </li>
-                <li class="dropdown-item">
-                    <a href="{{ route('edit') }}">
-                        <i class="bi bi-circle"></i><span class="dropdown-item-color">Actualizar d.fisicos</span>
                     </a>
                 </li>
                 <li class="dropdown-item">
@@ -122,8 +112,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#icons-navi" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-clipboard2-data"></i><span>Especialista</span><i
-                    class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-clipboard2-data"></i><span>Especialista</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="icons-navi" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 @if ($especialidad === null && $rol !== 'Administrador')

@@ -8,7 +8,6 @@ use App\Models\RecetaAnterior;
 use App\Models\Tipo;
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Auth;
 
 class RecetaSeeder extends Seeder
 {
@@ -19,8 +18,18 @@ class RecetaSeeder extends Seeder
      */
     public function run()
     {
+        /**
+         * Ingredientes
+         * id 5 -> Leche descremada
+         * id 8 -> Yogur con cereales
+         * id 9 -> Yema de huevo
+         * id 17 -> Arroz blanco
+         * id 10 -> Chorizo
+         * 
+         * Al momento de añadir un registro revisen en la tabla "nutricionals" para que tenga sentido los alimentos que necesita la receta.
+         */
         $ingredientes = [
-            [17, 9], [8, 5], [17, 10]
+            [17, 9], [8, 5], [17, 10], [8, 17], [8, 5], [17, 9], [17, 5], [8, 5], [8, 5], [17, 8], [17, 9], [8, 5], [9, 8], [8, 5], [9, 17], [17, 9]
         ];
 
         $recetas = [
@@ -42,10 +51,89 @@ class RecetaSeeder extends Seeder
                 'edad' => 20,
                 'genero' => 0,
             ],
+            [
+                'nombre' => 'Test1',
+                'descripcion' => 'Test1',
+                'edad' => 15,
+                'genero' => 1,
+            ],
+            [
+                'nombre' => 'Test2',
+                'descripcion' => 'Test2',
+                'edad' => 20,
+                'genero' => 1,
+            ],
+            [
+                'nombre' => 'Test3',
+                'descripcion' => 'Test3',
+                'edad' => 30,
+                'genero' => 1,
+            ],
+            [
+                'nombre' => 'Test4',
+                'descripcion' => 'Test4',
+                'edad' => 30,
+                'genero' => 1,
+            ],
+            [
+                'nombre' => 'Test5',
+                'descripcion' => 'Test5',
+                'edad' => 30,
+                'genero' => 1,
+            ],
+            [
+                'nombre' => 'Test6',
+                'descripcion' => 'Test6',
+                'edad' => 30,
+                'genero' => 1,
+            ],
+            [
+                'nombre' => 'Test7',
+                'descripcion' => 'Test7',
+                'edad' => 30,
+                'genero' => 1,
+            ],
+            [
+                'nombre' => 'Test8',
+                'descripcion' => 'Test8',
+                'edad' => 30,
+                'genero' => 1,
+            ],
+            [
+                'nombre' => 'Test9',
+                'descripcion' => 'Test9',
+                'edad' => 30,
+                'genero' => 1,
+            ],
+            [
+                'nombre' => 'Test10',
+                'descripcion' => 'Test10',
+                'edad' => 30,
+                'genero' => 1,
+            ],
+            [
+                'nombre' => 'Test11',
+                'descripcion' => 'Test11',
+                'edad' => 30,
+                'genero' => 1,
+            ],
+            [
+                'nombre' => 'Test12',
+                'descripcion' => 'Test12',
+                'edad' => 17,
+                'genero' => 0,
+            ],
+            [
+                'nombre' => 'Test13',
+                'descripcion' => 'Test13',
+                'edad' => 30,
+                'genero' => 0,
+            ],
         ];
 
         foreach ($recetas as $i => $receta) {
-            $tipo = Tipo::inRandomOrder()->first();
+            // $tipo = Tipo::inRandomOrder()->first();
+            $tipo = Tipo::where('nombre', '=', 'Nutritivo')->first();
             $comida = Comida::inRandomOrder()->first();
             $receta['tipo_id'] = $tipo->id;
             $receta['comida_id'] = $comida->id;

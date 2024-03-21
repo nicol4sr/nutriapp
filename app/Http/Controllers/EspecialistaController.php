@@ -111,7 +111,7 @@ class EspecialistaController extends Controller
     public function pending()
     {
         // $especialistas = Especialista::where('validado', '=', 0)->get();
-        $especialistas = Especialista::all();
+        $especialistas = Especialista::paginate(15);
         return view('especialista.pending', compact('especialistas'));
     }
 }

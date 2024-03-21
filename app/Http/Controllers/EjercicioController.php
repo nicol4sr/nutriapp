@@ -24,7 +24,7 @@ class EjercicioController extends Controller
             return redirect('/ejercicios');
         }
 
-        $ejercicios = Ejercicio::where('dificultad', '=', $dificultades[$difficulty])->get();
+        $ejercicios = Ejercicio::where('dificultad', '=', $dificultades[$difficulty])->paginate(15);
 
         return view('planes.ejercicio.difficulty', compact('ejercicios', 'difficulty'));
     }
@@ -32,7 +32,7 @@ class EjercicioController extends Controller
     public function personal()
     {
         $usuario_id = auth()->id();
-        $ejercicios = Ejercicio::where('usuario_id', '=', $usuario_id)->get();
+        $ejercicios = Ejercicio::where('usuario_id', '=', $usuario_id)->paginate(15);
 
         return view('planes.ejercicio.difficulty', compact('ejercicios'));
     }

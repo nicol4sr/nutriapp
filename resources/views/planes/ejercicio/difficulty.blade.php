@@ -20,8 +20,14 @@
         <div class="row">
             @foreach ($ejercicios as $ejercicio)
                 @php
-                    $imc_min = number_format($ejercicio->peso_min / ($ejercicio->altura_min * $ejercicio->altura_min), 2);
-                    $imc_max = number_format($ejercicio->peso_max / ($ejercicio->altura_max * $ejercicio->altura_max), 2);
+                    $imc_min = number_format(
+                        $ejercicio->peso_min / ($ejercicio->altura_min * $ejercicio->altura_min),
+                        2,
+                    );
+                    $imc_max = number_format(
+                        $ejercicio->peso_max / ($ejercicio->altura_max * $ejercicio->altura_max),
+                        2,
+                    );
                 @endphp
                 <div class="card p-0">
                     <div class="card-header">
@@ -54,5 +60,10 @@
                 </div>
             @endforeach
 
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    {{ $ejercicios->links() }}
+                </ul>
+            </nav>
     </section>
 @endsection

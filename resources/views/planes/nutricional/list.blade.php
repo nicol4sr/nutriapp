@@ -16,7 +16,7 @@
         <a href="{{ route('listado-planes') }}" class="btn btn-primary w-50"> <i class="bi bi-arrow-left"> </i>Regresar</a>
     </div>
 
-    <section class="section">
+    <section class="section mb-5">
         <div class="row">
             @foreach ($planes as $plan)
                 <div class="card p-0">
@@ -31,6 +31,11 @@
                     </div>
                 </div>
             @endforeach
-
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    {{ $planes->links() }}
+                </ul>
+            </nav>
+        </div>
     </section>
 @endsection
