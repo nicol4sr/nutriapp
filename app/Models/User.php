@@ -53,4 +53,26 @@ class User extends Authenticatable
     {
         return $this->hasOne(Especialista::class);
     }
+
+    public function haveRole(array | string $roles)
+    {
+        $userRole = $this->rol->rol;
+
+        if (is_array($roles)) {
+            return in_array($userRole, $roles);
+        }
+
+        return $userRole === $roles;
+    }
+
+    public function donthaveRole(array | string $roles)
+    {
+        $userRole = $this->rol->rol;
+
+        if (is_array($roles)) {
+            return !in_array($userRole, $roles);
+        }
+
+        return $userRole !== $roles;
+    }
 }

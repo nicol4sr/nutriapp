@@ -1,7 +1,7 @@
 @php
-    $user = auth()->user();
-    $especialidad = $user->especialista;
-    $rol = $user->rol->rol;
+    $usuario = auth()->user();
+    $especialidad = $usuario->especialista;
+    $rol = $usuario->rol->rol;
 @endphp
 
 <aside id="sidebar" class="sidebar">
@@ -17,11 +17,13 @@
         </li>
 
         <!-- Receta -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="{{ route('receta') }}">
-                <i class="bi bi-clipboard"></i><span>Crear Receta</span>
-            </a>
-        </li>
+        @if ($usuario->haveRole(['Nutricionista', 'Entrenador', 'Administrador']))
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('receta') }}">
+                    <i class="bi bi-clipboard"></i><span>Crear Receta</span>
+                </a>
+            </li>
+        @endif
 
         <!-- Planes -->
         <li class="nav-item active">
@@ -57,16 +59,6 @@
                 <i class="bi bi-graph-up-arrow"></i><span>Estadisticas</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                {{-- <li class="dropdown-item">
-                    <a href="{{ route('logros') }}">
-                        <i class="bi bi-circle"></i><span class="dropdown-item-color">Logros y Metas</span>
-                    </a>
-                </li> --}}
-                {{-- <li class="dropdown-item">
-                    <a href="{{ route('entrenamiento') }}">
-                        <i class="bi bi-circle"></i><span class="dropdown-item-color">Entrenamiento</span>
-                    </a>
-                </li> --}}
                 <li class="dropdown-item">
                     <a href="{{ route('peso') }}">
                         <i class="bi bi-circle"></i><span class="dropdown-item-color">Peso</span>
@@ -105,7 +97,8 @@
                 </li>
                 <li class="dropdown-item">
                     <a href="{{ route('editp') }}">
-                        <i class="bi bi-circle"></i><span class="dropdown-item-color">Actualizar d.psicologicos</span>
+                        <i class="bi bi-circle"></i><span class="dropdown-item-color">Actualizar
+                            d.psicologicos</span>
                     </a>
                 </li>
             </ul>
@@ -115,14 +108,14 @@
                 <i class="bi bi-clipboard2-data"></i><span>Especialista</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="icons-navi" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                @if ($especialidad === null && $rol !== 'Administrador')
+                @if ($especialidad === null && $usuario->dontHaveRole('Administrador'))
                     <li class="dropdown-item">
                         <a href="{{ route('registro-especialista') }}">
                             <i class="bi bi-circle"></i><span class="dropdown-item-color">Registrarme</span>
                         </a>
                     </li>
                 @endif
-                @if ($rol === 'Administrador')
+                @if ($usuario->haveRole('Administrador'))
                     <li class="dropdown-item">
                         <a href="{{ route('pendiente-especialista') }}">
                             <i class="bi bi-circle"></i><span class="dropdown-item-color">Especialistas</span>

@@ -15,43 +15,58 @@ class UsuarioSeeder extends Seeder
      */
     public function run()
     {
-        $rol_admin = Rol::where('rol', '=', 'Administrador')->first()->id;
-        $rol_entrenador = Rol::where('rol', '=', 'Entrenador')->first()->id;
+        $roles = Rol::all();
+        $getRol = function ($name) use ($roles) {
+            return $roles->where('rol', '=', $name)->first()->id;
+        };
 
-        $sistema = [
+        // REVISAR
+        // SISTEMA
+        User::create([
             'name' => 'Sistema',
             'email' => 'sistem_admin@email.com',
-            'rol_id' => $rol_admin,
+            'rol_id' => $getRol('Administrador'),
             'password' => bcrypt('admin')
-        ];
+        ]);
 
-        $admin = [
+        // ADMIN
+        User::create([
             'name' => 'Admin',
             'email' => 'admin@email.com',
-            'rol_id' => $rol_admin,
+            'rol_id' => $getRol('Administrador'),
             'password' => bcrypt('admin')
-        ];
+        ]);
 
-        $entrenadores = [
-            [
-                'name' => 'Jorge Gómez',
-                'email' => 'entrenador1@email.com',
-                'rol_id' => $rol_entrenador,
-                'password' => bcrypt('entrenador')
-            ],
-            [
-                'name' => 'Lucía López',
-                'email' => 'entrenador2@email.com',
-                'rol_id' => $rol_entrenador,
-                'password' => bcrypt('entrenador')
-            ],
-        ];
+        // ENTRENADOR
+        User::create([
+            'name' => 'Jorge Gómez',
+            'email' => 'entrenador@email.com',
+            'rol_id' => $getRol('Entrenador'),
+            'password' => bcrypt('entrenador')
+        ]);
 
-        User::create($sistema);
-        User::create($admin);
+        // NUTRICIONISTA
+        User::create([
+            'name' => 'Marta Aguilar',
+            'email' => 'nutricionista@email.com',
+            'rol_id' => $getRol('Nutricionista'),
+            'password' => bcrypt('nutricionista')
+        ]);
 
-        foreach ($entrenadores as $entrenador) {
-            User::create($entrenador);
-        }
+        // PSICOLOGO
+        User::create([
+            'name' => 'Mario Hernández',
+            'email' => 'psicologo@email.com',
+            'rol_id' => $getRol('Psicologo'),
+            'password' => bcrypt('psicologo')
+        ]);
+
+        // USUARIO
+        User::create([
+            'name' => 'Pedro López',
+            'email' => 'usuario@email.com',
+            'rol_id' => $getRol('Usuario'),
+            'password' => bcrypt('usuario')
+        ]);
     }
 }
