@@ -11,14 +11,22 @@ use function PHPUnit\Framework\returnSelf;
 
 class nutricionistasController extends Controller
 {
+    public function __construct()
+    {
+        // Valida la autenticación
+        $this->middleware('auth');
+        $this->middleware('prevent-back-history');
+        $this->middleware('check_user_answer_data_form');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index( nutricionistas $nutricionistas)
+    public function index(nutricionistas $nutricionistas)
     {
-        return view('especialistas.nutricionistas', compact('nutricionistas'));  
+        return view('especialistas.nutricionistas', compact('nutricionistas'));
     }
 
     /**
@@ -39,21 +47,21 @@ class nutricionistasController extends Controller
      */
     public function store(Request $request)
     {
-        $nutricionistas= new nutricionistas ();
+        $nutricionistas = new nutricionistas();
 
-        $nutricionistas->usuario_id= $request ->usuario_id;
-        $nutricionistas->pg1 = $request ->pg1;
-        $nutricionistas->pg2 = $request ->pg2;
-        $nutricionistas->pg3 = $request ->pg3;
-        $nutricionistas->pg4 = $request ->pg4;
-        $nutricionistas->pg5 = $request ->pg5;
-        $nutricionistas->pg6 = $request ->pg6;
-        $nutricionistas->pg7 = $request ->pg7;
-        $nutricionistas->pg8 = $request ->pg8;
-       
-    
+        $nutricionistas->usuario_id = $request->usuario_id;
+        $nutricionistas->pg1 = $request->pg1;
+        $nutricionistas->pg2 = $request->pg2;
+        $nutricionistas->pg3 = $request->pg3;
+        $nutricionistas->pg4 = $request->pg4;
+        $nutricionistas->pg5 = $request->pg5;
+        $nutricionistas->pg6 = $request->pg6;
+        $nutricionistas->pg7 = $request->pg7;
+        $nutricionistas->pg8 = $request->pg8;
+
+
         $nutricionistas->save();
-        return view('especialistas.nutricionistas', compact('nutricionistas'));  
+        return view('especialistas.nutricionistas', compact('nutricionistas'));
     }
 
     /**

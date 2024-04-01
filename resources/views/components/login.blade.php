@@ -2,9 +2,8 @@
     @csrf
     <div class="container">
         <div class="form-group  mt-3">
-            <label class="text-dark col-sm-4">Correo</label>
+            <label class="text-dark">Correo</label>
             <div class="input-group has-validation">
-                <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-person-fill"></i></span>
                 <input type="text" name="email" class="form-control @error('email') is-invalid @enderror"
                     placeholder="Correo">
                 @error('email')
@@ -15,9 +14,8 @@
             </div>
         </div>
         <div class="form-group mt-3">
-            <label class="text-dark col-sm-4 col-form-label" for="staticEmail">Contraseña</label>
+            <label class="text-dark col-form-label" for="staticEmail">Contraseña</label>
             <div class="input-group has-validation">
-                <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-person-fill"></i></span>
                 <input type="password" name="password"class="form-control @error('password') is-invalid @enderror"
                     placeholder="Contraseña">
                 @error('password')
@@ -27,10 +25,15 @@
                 @enderror
             </div>
         </div>
-        <br>
-        <input type="submit" class="register btn btn-primary w-100" value="Ingresar">
+
+        <button type="submit" class="mt-3 register btn btn-primary w-100">
+            Ingresa
+        </button>
     </div>
-    <div class="container signin">
-        <p style="color: black;">¿No tienes una cuenta? <a href={{ route('register') }}>Regístrate ahora</a>.</p>
+    <div class="container signin text-center">
+        <p class="text-muted">¿No tienes una cuenta?</p>
+        <a href={{ route('register') }} class="d-block">Regístrate ahora</a>
+        {{-- <a href={{ route('password') }} class="d-block">Olvidé mi contraseña</a> --}}
+        <a href={{ route('password.request') }} class="d-block">Olvidé mi contraseña</a>
     </div>
 </form>

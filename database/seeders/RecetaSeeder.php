@@ -18,20 +18,6 @@ class RecetaSeeder extends Seeder
      */
     public function run()
     {
-        /**
-         * Ingredientes
-         * id 5 -> Leche descremada
-         * id 8 -> Yogur con cereales
-         * id 9 -> Yema de huevo
-         * id 17 -> Arroz blanco
-         * id 10 -> Chorizo
-         * 
-         * Al momento de añadir un registro revisen en la tabla "nutricionals" para que tenga sentido los alimentos que necesita la receta.
-         */
-        $ingredientes = [
-            [17, 9], [8, 5], [17, 10], [8, 17], [8, 5], [17, 9], [17, 5], [8, 5], [8, 5], [17, 8], [17, 9], [8, 5], [9, 8], [8, 5], [9, 17], [17, 9]
-        ];
-
         $recetas = [
             [
                 'nombre' => 'Arroz con huevo',
@@ -131,14 +117,15 @@ class RecetaSeeder extends Seeder
             ],
         ];
 
-        foreach ($recetas as $i => $receta) {
-            // $tipo = Tipo::inRandomOrder()->first();
-            $tipo = Tipo::where('nombre', '=', 'Nutritivo')->first();
+        $usuario = User::where('name', '=', 'Admin')->first();
+
+        foreach ($recetas as $receta) {
+            $tipo = Tipo::inRandomOrder()->first();
             $comida = Comida::inRandomOrder()->first();
             $receta['tipo_id'] = $tipo->id;
             $receta['comida_id'] = $comida->id;
-            $registro = Receta::create($receta + ['usuario_id' => User::where('rol_id', '=', 1)->first()->id]);
-            $registro->alimentos()->sync($ingredientes[$i]);
+            $registro = Receta::create($receta + ['usuario_id' => $usuario->first()->id]);
+            $registro->alimentos()->limit(5)->get();
         }
 
         $recetasAnterior = [

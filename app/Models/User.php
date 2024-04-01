@@ -2,15 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Notifications\SendEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -21,8 +22,12 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'rol_id',
-        'foto'
+        'foto',
+        'genero',
+        'fecha_nacimiento',
+        'nacionalidad_id',
+        'objetivo_id',
+        'habitos'
     ];
 
     /**
@@ -42,37 +47,38 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'email_blocked_at' => 'datetime'
     ];
-
-    public function rol()
-    {
-        return $this->belongsTo(Rol::class);
-    }
 
     public function especialista()
     {
         return $this->hasOne(Especialista::class);
     }
 
-    public function haveRole(array | string $roles)
+    public function nacionalidad()
     {
-        $userRole = $this->rol->rol;
-
-        if (is_array($roles)) {
-            return in_array($userRole, $roles);
-        }
-
-        return $userRole === $roles;
+        return $this->hasOne(nacionalidades::class, 'id', 'nacionalidad_id');
     }
 
-    public function donthaveRole(array | string $roles)
+    public function objetivo()
     {
-        $userRole = $this->rol->rol;
+        return $this->hasOne(Tipo::class, 'id', 'objetivo_id');
+    }
 
-        if (is_array($roles)) {
-            return !in_array($userRole, $roles);
-        }
+    public function respuestas()
+    {
+        return $this->hasMany(DatosUsuario::class, 'usuario_id', 'id');
+    }
 
-        return $userRole !== $roles;
+    public function consultas()
+    {
+        return $this->hasMany(Consulta::class, 'usuario_id', 'id');
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $url = url('/reset-password/' . $token);
+
+        $this->notify(new SendEmail($url));
     }
 }

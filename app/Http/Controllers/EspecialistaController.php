@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class EspecialistaController extends Controller
 {
+    public function __construct()
+    {
+        // Valida la autenticación
+        $this->middleware('auth');
+        $this->middleware('prevent-back-history');
+        $this->middleware('check_user_answer_data_form');
+    }
+
     /**
      * Display a listing of the resource.
      *

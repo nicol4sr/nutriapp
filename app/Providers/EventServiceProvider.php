@@ -2,6 +2,12 @@
 
 namespace App\Providers;
 
+use App\Events\NotificationEvent;
+use App\Listeners\ConsultaEspecialistaListener;
+use App\Listeners\ConsultaEspecialistaRespuestaListener;
+use App\Listeners\UserNotificationListener;
+use App\Notifications\ConsultaNotification;
+use App\Notifications\EspecialistaNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -17,6 +23,12 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        EspecialistaNotification::class => [
+            ConsultaEspecialistaListener::class,
+        ],
+        ConsultaNotification::class => [
+            ConsultaEspecialistaRespuestaListener::class,
         ],
     ];
 

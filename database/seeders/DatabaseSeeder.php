@@ -15,16 +15,17 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call([
+            TipoSeeder::class,
+            NacionalidadSeeder::class,
             RolSeeder::class,
             UsuarioSeeder::class,
-            TipoSeeder::class,
             NutricionalSeeder::class,
             ComidaSeeder::class,
             RecetaSeeder::class,
             GrupoMuscularSeeder::class,
             PlanesAlimenticiosSeeder::class,
             PartesCuerpoSeeder::class,
-            NacionalidadSeeder::class
+            PreguntasSeeder::class,
         ]);
     }
 }

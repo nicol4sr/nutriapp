@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\nacionalidades;
+use App\Models\Tipo;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use App\Models\Rol;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Role;
 
 class RegisterController extends Controller
 {
@@ -42,6 +45,15 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function showRegistrationForm()
+    {
+        $objetivos = Tipo::all('id', 'nombre');
+        $nacionalidades = nacionalidades::all('id', 'pais');
+
+        return view('auth.register', compact('objetivos', 'nacionalidades'));
+    }
+
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -54,6 +66,11 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:4', 'confirmed'],
+            'genero' => ['required', 'string', 'boolean'],
+            'fecha_nacimiento' => ['required', 'string'],
+            'nacionalidad' => ['required', 'numeric', 'not_in:0'],
+            'objetivo' => ['required', 'numeric', 'not_in:0'],
+            'habitos' => ['required', 'numeric', 'between:0,4'],
         ]);
     }
 
@@ -65,12 +82,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $rol = Rol::where('rol', '=', 'Usuario')->first()->id;
+        $rol = Role::where('name', '=', 'Usuario')->first();
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'rol_id' => $rol
-        ]);
+            'genero' => $data['genero'],
+            'fecha_nacimiento' => Carbon::parse($data['fecha_nacimiento'])->format('Y-m-d'),
+            'nacionalidad_id' => $data['nacionalidad'],
+            'objetivo_id' => $data['objetivo'],
+            'habitos' => $data['habitos']
+        ])->assignRole($rol);
     }
 }

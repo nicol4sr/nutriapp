@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Planes nutricionales')
+
 @section('content')
     <div class="pagetitle">
         <h1>Planes nutricionales</h1>

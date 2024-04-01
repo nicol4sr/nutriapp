@@ -16,6 +16,7 @@ class RecetaController extends Controller
         // Valida la autenticación
         $this->middleware('auth');
         $this->middleware('prevent-back-history');
+        $this->middleware('check_user_answer_data_form');
     }
 
     public function index()

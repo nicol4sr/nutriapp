@@ -5,11 +5,18 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreEjercicioRequest;
 use App\Models\Ejercicio;
 use App\Models\PartesCuerpo;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class EjercicioController extends Controller
 {
+    public function __construct()
+    {
+        // Valida la autenticación
+        $this->middleware('auth');
+        $this->middleware('prevent-back-history');
+        $this->middleware('check_user_answer_data_form');
+    }
+
     public function index()
     {
         $ejercicios = Ejercicio::all();
@@ -24,7 +31,13 @@ class EjercicioController extends Controller
             return redirect('/ejercicios');
         }
 
-        $ejercicios = Ejercicio::where('dificultad', '=', $dificultades[$difficulty])->paginate(15);
+        $ejercicios = Ejercicio::join('users', 'users.id', '=', 'ejercicio.usuario_id')
+            ->join('rols', 'rols.id', '=', 'users.rol_id')
+            ->where('dificultad', '=', $dificultades[$difficulty])
+            ->where('usuario_id', '!=', auth()->user()->id)
+            ->whereIn('rol', ['Administrador', 'Entrenador'])
+            ->select('ejercicio.id', 'nombre', 'descripcion', 'dificultad', 'genero', 'edad_min', 'edad_max', 'peso_min', 'peso_max', 'altura_min', 'altura_max', 'parte_cuerpo_id', 'ejercicio.created_at')
+            ->paginate(15);
 
         return view('planes.ejercicio.difficulty', compact('ejercicios', 'difficulty'));
     }

@@ -39,10 +39,9 @@
                 </a>
             </div>
         </div>
-        <br>
     </section>
 
-    <section class="section">
+    <section class="mt-3 section">
         <div class="row">
             <div class="col-lg-4">
                 <div class="card text-white">

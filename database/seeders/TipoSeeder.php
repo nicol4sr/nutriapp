@@ -22,14 +22,8 @@ class TipoSeeder extends Seeder
                 'nombre' => 'Bajar de peso'
             ],
             [
-                'nombre' => 'Nutritivo'
+                'nombre' => 'Balancear mi nutrición'
             ],
-            // [
-            //     'nombre' => 'vegetariano'
-            // ],
-            // [
-            //     'nombre' => 'vegano'
-            // ],
         ];
 
         foreach ($tipos as $tipo) {

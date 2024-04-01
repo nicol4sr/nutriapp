@@ -11,6 +11,14 @@ use function PHPUnit\Framework\returnSelf;
 
 class psicosController extends Controller
 {
+    public function __construct()
+    {
+        // Valida la autenticación
+        $this->middleware('auth');
+        $this->middleware('prevent-back-history');
+        $this->middleware('check_user_answer_data_form');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +26,7 @@ class psicosController extends Controller
      */
     public function index(psicos $psicos)
     {
-         return view('configuracion.psicos', compact('psicos'));
+        return view('configuracion.psicos', compact('psicos'));
     }
 
     /**
@@ -28,7 +36,6 @@ class psicosController extends Controller
      */
     public function create()
     {
-      
     }
 
     /**
@@ -39,19 +46,19 @@ class psicosController extends Controller
      */
     public function store(Request $request)
     {
-        $psicos= new psicos ();
+        $psicos = new psicos();
 
-        $psicos->usuario_id = $request ->usuario_id;
-        $psicos->pg1 = $request ->pg1;
-        $psicos->pg2 = $request ->pg2;
-        $psicos->pg3 = $request ->pg3;
-        $psicos->pg4 = $request ->pg4;
-        $psicos->pg5 = $request ->pg5;
-        $psicos->pg6 = $request ->pg6;
-        $psicos->pg7 = $request ->pg7;
-        $psicos->pg8 = $request ->pg8;
-       
-       
+        $psicos->usuario_id = $request->usuario_id;
+        $psicos->pg1 = $request->pg1;
+        $psicos->pg2 = $request->pg2;
+        $psicos->pg3 = $request->pg3;
+        $psicos->pg4 = $request->pg4;
+        $psicos->pg5 = $request->pg5;
+        $psicos->pg6 = $request->pg6;
+        $psicos->pg7 = $request->pg7;
+        $psicos->pg8 = $request->pg8;
+
+
         $psicos->save();
         return view('configuracion.psicos', compact('psicos'));
     }
@@ -64,7 +71,7 @@ class psicosController extends Controller
      */
     public function show()
     {
-        $psicos = psicos::where('usuario_id',  auth()->user()->id)->latest('created_at')->take(1)->get(); 
+        $psicos = psicos::where('usuario_id',  auth()->user()->id)->latest('created_at')->take(1)->get();
         return view('configuracion.editp', compact('psicos'));
     }
 

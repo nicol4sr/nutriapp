@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Rol extends Model
+class DatoFisico extends Model
 {
     use HasFactory;
 
-    protected $table = 'rols';
+    protected $table = 'datos_fisicos';
+    protected $fillable = ['altura', 'peso', 'usuario_id'];
 }
