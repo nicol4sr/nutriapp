@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Comida;
 use App\Models\Receta;
-use App\Models\RecetaAnterior;
 use App\Models\Tipo;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -22,99 +21,92 @@ class RecetaSeeder extends Seeder
             [
                 'nombre' => 'Arroz con huevo',
                 'descripcion' => 'Una rica receta',
-                'edad' => 25,
-                'genero' => 1,
             ],
             [
                 'nombre' => 'Yogurt chocolatado',
                 'descripcion' => 'Una sabrosa mezcla láctea',
-                'edad' => 45,
-                'genero' => 0,
             ],
             [
                 'nombre' => 'Arroz con chorizo',
                 'descripcion' => 'Una rica receta',
-                'edad' => 20,
-                'genero' => 0,
+            ],
+
+            [
+                "nombre" => "Arroz con pollo",
+                "descripcion" => "Deliciosa receta de arroz con pollo",
             ],
             [
-                'nombre' => 'Test1',
-                'descripcion' => 'Test1',
-                'edad' => 15,
-                'genero' => 1,
+                "nombre" => "Spaghetti a la bolognesa",
+                "descripcion" => "Clásica receta de spaghetti con salsa bolognesa",
             ],
             [
-                'nombre' => 'Test2',
-                'descripcion' => 'Test2',
-                'edad' => 20,
-                'genero' => 1,
+                "nombre" => "Ensalada César",
+                "descripcion" => "Refrescante ensalada con pollo y aderezo César",
             ],
             [
-                'nombre' => 'Test3',
-                'descripcion' => 'Test3',
-                'edad' => 30,
-                'genero' => 1,
+                "nombre" => "Tacos de carne asada",
+                "descripcion" => "Sabrosos tacos con carne asada y guarniciones",
             ],
             [
-                'nombre' => 'Test4',
-                'descripcion' => 'Test4',
-                'edad' => 30,
-                'genero' => 1,
+                "nombre" => "Sopa de lentejas",
+                "descripcion" => "Caliente y nutritiva sopa de lentejas",
             ],
             [
-                'nombre' => 'Test5',
-                'descripcion' => 'Test5',
-                'edad' => 30,
-                'genero' => 1,
+                "nombre" => "Pasta Alfredo",
+                "descripcion" => "Delicioso plato de pasta con salsa Alfredo",
             ],
             [
-                'nombre' => 'Test6',
-                'descripcion' => 'Test6',
-                'edad' => 30,
-                'genero' => 1,
+                "nombre" => "Hamburguesa clásica",
+                "descripcion" => "La hamburguesa de siempre, con carne y queso",
             ],
             [
-                'nombre' => 'Test7',
-                'descripcion' => 'Test7',
-                'edad' => 30,
-                'genero' => 1,
+                "nombre" => "Pescado a la parrilla",
+                "descripcion" => "Salmón a la parrilla con limón y hierbas",
             ],
             [
-                'nombre' => 'Test8',
-                'descripcion' => 'Test8',
-                'edad' => 30,
-                'genero' => 1,
+                "nombre" => "Ceviche de camarón",
+                "descripcion" => "Refrescante ceviche de camarón con limón y cilantro",
             ],
             [
-                'nombre' => 'Test9',
-                'descripcion' => 'Test9',
-                'edad' => 30,
-                'genero' => 1,
+                "nombre" => "Pizza Margarita",
+                "descripcion" => "La clásica pizza Margarita con tomate y mozzarella",
             ],
             [
-                'nombre' => 'Test10',
-                'descripcion' => 'Test10',
-                'edad' => 30,
-                'genero' => 1,
+                "nombre" => "Pollo a la naranja",
+                "descripcion" => "Pollo agridulce con salsa de naranja",
             ],
             [
-                'nombre' => 'Test11',
-                'descripcion' => 'Test11',
-                'edad' => 30,
-                'genero' => 1,
+                "nombre" => "Sushi de salmón",
+                "descripcion" => "Rollos de sushi con salmón fresco y arroz",
             ],
             [
-                'nombre' => 'Test12',
-                'descripcion' => 'Test12',
-                'edad' => 17,
-                'genero' => 0,
+                "nombre" => "Pastel de chocolate",
+                "descripcion" => "Esponjoso pastel de chocolate con cobertura de ganache",
             ],
             [
-                'nombre' => 'Test13',
-                'descripcion' => 'Test13',
-                'edad' => 30,
-                'genero' => 0,
+                "nombre" => "Canelones de espinacas",
+                "descripcion" => "Canelones rellenos de espinacas y ricota",
             ],
+            [
+                "nombre" => "Gazpacho andaluz",
+                "descripcion" => "Refrescante sopa fría de tomate y pepino",
+            ],
+            [
+                "nombre" => "Lasaña de carne",
+                "descripcion" => "Deliciosa lasaña de carne molida y salsa de tomate",
+            ],
+            [
+                "nombre" => "Tarta de manzana",
+                "descripcion" => "Clásica tarta de manzana con masa quebrada",
+            ],
+            [
+                "nombre" => "Sopa de pollo",
+                "descripcion" => "Caliente y reconfortante sopa de pollo casera",
+            ],
+            [
+                "nombre" => "Tacos de pescado",
+                "descripcion" => "Tacos de pescado empanizado con aderezo de chipotle",
+            ]
         ];
 
         $usuario = User::where('name', '=', 'Admin')->first();
@@ -124,131 +116,10 @@ class RecetaSeeder extends Seeder
             $comida = Comida::inRandomOrder()->first();
             $receta['tipo_id'] = $tipo->id;
             $receta['comida_id'] = $comida->id;
+            $receta['edad'] = rand(15, 60);
+            $receta['genero'] = rand(0, 1);
             $registro = Receta::create($receta + ['usuario_id' => $usuario->first()->id]);
             $registro->alimentos()->limit(5)->get();
-        }
-
-        $recetasAnterior = [
-            [
-                'nombre' => 'Yogur griego con cereales y frutos secos',
-                'descripcion' => ' El yogur griego, además de nutritivo, posee una textura cremosa muy agradable al paladar'
-            ],
-            [
-                'nombre' => 'Pan integral con cereales, tortilla y brotes germi',
-                'descripcion' => 'Te aportarán calorías llenas de proteínas y grasas no saturadas'
-            ],
-            [
-                'nombre' => 'Requesón con fruta',
-                'descripcion' => 'Un estupendo desayuno que te hará aumentar tu masa muscular'
-            ],
-            [
-                'nombre' => 'Batido de cambur y avena',
-                'descripcion' => 'Es una excelente alternativas para consumir en el desayuno'
-            ],
-            [
-                'nombre' => 'Tostadas de pan integral con aguacate y queso fres',
-                'descripcion' => 'Aportará a tu organismo calorías beneficiosas que te ayudarán a desarrollar tus músculos'
-            ],
-            [
-                'nombre' => 'Avena, kiwi y semillas de chia',
-                'descripcion' => 'Aporte calorico: 376,45 KCAL'
-            ],
-            [
-                'nombre' => 'Tortillas de espinaca con bicote integral',
-                'descripcion' => 'Aporte nutricional adecuado'
-            ],
-            [
-                'nombre' => 'Batido con cambur y fresa',
-                'descripcion' => 'Deliciosa receta para bajar de peso'
-            ],
-            [
-                'nombre' => 'Avena con yogurt y frutos rojos',
-                'descripcion' => 'Alto en fibras'
-            ],
-            [
-                'nombre' => 'Tostadas de aguacate y germinados',
-                'descripcion' => 'Rico en omega 3'
-            ],
-            [
-                'nombre' => 'Burrito de guacamole',
-                'descripcion' => 'Buena eleccion para nutrir'
-            ],
-            [
-                'nombre' => 'Pan proteico con pavo natural y aguacate',
-                'descripcion' => ' El pan de espelta, por sus beneficios, también es perfecto'
-            ],
-            [
-                'nombre' => 'Estofado de pollo',
-                'descripcion' => 'Estofado de pollo'
-            ],
-            [
-                'nombre' => 'Pasta cremosa con pollo cajún',
-                'descripcion' => 'Deliciosa receta proteica de pasta cremosa con pollo estilo cajún'
-            ],
-            [
-                'nombre' => 'Ensalada de pollo con cuscús',
-                'descripcion' => 'Esta ensalada templada es muy completa'
-            ],
-            [
-                'nombre' => 'Atún salteado con verduras',
-                'descripcion' => 'Este alimento contiene abundante omega 3'
-            ],
-            [
-                'nombre' => 'Fiambre de pavo casero',
-                'descripcion' => 'Sin duda, esta carne baja en grasas y calorías'
-            ],
-            [
-                'nombre' => 'Abanico de calabacines al parmesano',
-                'descripcion' => 'El calabacín es una verdura con grandes nutrientes'
-            ],
-            [
-                'nombre' => 'Alcachofas con apio y manzanas',
-                'descripcion' => 'Las alcachofas son una fuente de vitamina'
-            ],
-            [
-                'nombre' => 'Brocoli con vinagreta de hortalizas',
-                'descripcion' => 'Nutritivo en vitaminas'
-            ],
-            [
-                'nombre' => 'Ensalada de papaya y tofu',
-                'descripcion' => 'Las ensaladas frescas son la opción perfecta para una cena ligera'
-            ],
-            [
-                'nombre' => 'Tortitas rellenas',
-                'descripcion' => 'Receta de cena para ganar músculo'
-            ],
-            [
-                'nombre' => 'Pasta cremosa con pollo cajún',
-                'descripcion' => 'Deliciosa receta proteica de pasta cremosa con pollo estilo cajún'
-            ],
-            [
-                'nombre' => 'Crema de verduras y guisantes',
-                'descripcion' => 'Resultan saciantes y muy saludables'
-            ],
-            [
-                'nombre' => 'Gazpacho y carne de ave',
-                'descripcion' => 'La combinación es perfecta y la podremos digerir'
-            ],
-            [
-                'nombre' => 'Pescado y piña asada',
-                'descripcion' => 'El pescado es proteína animal baja en grasa'
-            ],
-            [
-                'nombre' => 'Aguacate relleno',
-                'descripcion' => 'Contine grasas naturales'
-            ],
-            [
-                'nombre' => 'Sándwich de pollo asado con ensalada',
-                'descripcion' => 'La combinación es perfecta'
-            ],
-            [
-                'nombre' => 'Salmón con verduritas',
-                'descripcion' => 'Nutritivo en vitaminas'
-            ],
-        ];
-
-        foreach ($recetasAnterior as $receta) {
-            RecetaAnterior::create($receta);
         }
     }
 }

@@ -30,16 +30,6 @@ class EspecialistaController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -59,51 +49,6 @@ class EspecialistaController extends Controller
         return redirect('/');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Especialista  $especialista
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Especialista $especialista)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Especialista  $especialista
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Especialista $especialista)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Especialista  $especialista
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Especialista $especialista)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Especialista  $especialista
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Especialista $especialista)
-    {
-        //
-    }
-
     public function profile(Especialista $especialista)
     {
         return view('especialista.show', compact('especialista'));
@@ -118,7 +63,6 @@ class EspecialistaController extends Controller
 
     public function pending()
     {
-        // $especialistas = Especialista::where('validado', '=', 0)->get();
         $especialistas = Especialista::paginate(15);
         return view('especialista.pending', compact('especialistas'));
     }

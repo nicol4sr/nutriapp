@@ -57,7 +57,7 @@ class PreguntasSeeder extends Seeder
             ],
             [
                 'tipo' => 0,
-                'nombre' => 'Tiene sintomas de ansiedad?'
+                'nombre' => '¿Tiene sintomas de ansiedad?'
             ],
 
             // FÍSICAS
@@ -77,7 +77,7 @@ class PreguntasSeeder extends Seeder
             // CALÓRICAS
             [
                 'tipo' => 1,
-                'nombre' => '¿Cuantas veces come al día ?'
+                'nombre' => '¿Cuantas veces come al día?'
             ],
             [
                 'tipo' => 1,

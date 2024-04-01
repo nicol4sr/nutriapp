@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             TipoSeeder::class,
             NacionalidadSeeder::class,
+            PreguntasSeeder::class,
             RolSeeder::class,
             UsuarioSeeder::class,
             NutricionalSeeder::class,
@@ -25,7 +26,6 @@ class DatabaseSeeder extends Seeder
             GrupoMuscularSeeder::class,
             PlanesAlimenticiosSeeder::class,
             PartesCuerpoSeeder::class,
-            PreguntasSeeder::class,
         ]);
     }
 }

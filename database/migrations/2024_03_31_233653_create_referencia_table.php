@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRecetasAnteriorTable extends Migration
+class CreateReferenciaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateRecetasAnteriorTable extends Migration
      */
     public function up()
     {
-        Schema::create('recetas_anterior', function (Blueprint $table) {
+        Schema::create('referencia', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('descripcion');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ class CreateRecetasAnteriorTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('recetas_anterior');
+        Schema::dropIfExists('referencia');
     }
 }
