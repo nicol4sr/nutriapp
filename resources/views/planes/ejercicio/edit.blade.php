@@ -233,24 +233,26 @@
                                 </div>
 
                                 <div class="mb-3 has-validation">
-                                    <label class="col-form-label">Parte del cuerpo a trabajar</label>
-
-                                    <select name="parte_cuerpo_id"
-                                        class="form-select @error('parte_cuerpo_id') is-invalid @enderror"
-                                        aria-label="Default select example">
-                                        <option value="" disabled selected>Seleccionar</option>
+                                    <p class="col-form-label">Parte del cuerpo a trabajar</p>
+                                    <div class="row">
                                         @foreach ($grupos_musculares as $grupo)
-                                            <option value="{{ $grupo->id }}"
-                                                {{ $ejercicio->parte_cuerpo_id === $grupo->id ? 'selected' : '' }}>
-                                                {{ $grupo->nombre }}</option>
+                                            @php
+                                                $check = in_array(
+                                                    $grupo->id,
+                                                    $ejercicio->ejercicio_partes->pluck('parte_cuerpo_id')->toArray(),
+                                                );
+                                            @endphp
+                                            <label>
+                                                {{ $grupo->nombre }}
+                                                <input type="checkbox" name="grupo[]" value="{{ $grupo->id }}"
+                                                    {{ $check ? 'checked' : '' }}>
+                                            </label>
+                                            <textarea name="explicacion[]" cols="30" rows="4">{{ $check ? $ejercicio->ejercicio_partes[0]->descripcion : '' }}</textarea>
                                         @endforeach
-                                    </select>
 
-                                    @error('parte_cuerpo_id')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    </div>
+
+
                                 </div>
 
                                 <div class="row mb-3 text-center">

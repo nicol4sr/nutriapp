@@ -14,7 +14,7 @@ class NutricionalController extends Controller
 
     public function datos()
     {
-        $referencias = Nutricional::paginate(15);
+        $referencias = Nutricional::all();
         return view('tabla.nutricional', compact('referencias'));
     }
 }

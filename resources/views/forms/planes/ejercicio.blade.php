@@ -156,26 +156,28 @@
         </div>
 
         <div class="mb-3 has-validation">
-            <label class="col-form-label">Parte del cuerpo a trabajar</label>
-
-            <select name="parte_cuerpo_id" class="form-select @error('parte_cuerpo_id') is-invalid @enderror"
-                aria-label="Default select example">
-                <option value="" disabled selected>Seleccionar</option>
+            <p class="col-form-label">Parte del cuerpo a trabajar</p>
+            <div class="row">
                 @foreach ($grupos_musculares as $grupo)
-                    <option value="{{ $grupo->id }}">{{ $grupo->nombre }}</option>
+                    <label>
+                        {{ $grupo->nombre }}
+                        <input type="checkbox" name="grupo[]" value="{{ $grupo->id }}">
+                    </label>
+                    <textarea name="explicacion[]" value="{{ $grupo->nombre }}" cols="30" rows="4"></textarea>
                 @endforeach
-            </select>
+            </div>
 
-            @error('parte_cuerpo_id')
+
+            {{-- @error('parte_cuerpo_id')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
-            @enderror
+            @enderror --}}
         </div>
 
         <div class="row mb-3 text-center">
             <div class="col-sm-12">
-                <button type="submit" class="btn btn-primary w-50">Crear</button>
+                <button type="submit" class="btn btn-primary w-100">Crear</button>
             </div>
         </div>
     </div>

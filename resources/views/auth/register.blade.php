@@ -11,6 +11,18 @@
     ];
 @endphp
 
+@section('js')
+    <script>
+        document.getElementById('altura').addEventListener('input', function() {
+            if (this.value.length > 2) {
+                var val = this.value.replace(/[^\d]/, '');
+                val = val.substr(0, val.length - 2) + "." + val.substr(-2);
+                this.value = val;
+            }
+        });
+    </script>
+@endsection
+
 @section('content')
     <div class="container">
         <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
@@ -74,6 +86,22 @@
                                         Masculino
                                     </label>
                                     @error('genero')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <label for="altura">Altura</label>
+                                <div class="input-group mb-3">
+                                    <input id="altura" type="number" step="0.01" name="altura"
+                                        value="{{ old('altura') }}"
+                                        class="form-control @error('altura') is-invalid @enderror" placeholder="Altura"
+                                        aria-label="altura" required>
+
+                                    @error('altura')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

@@ -71,7 +71,7 @@
                 <div class="col-lg-11">
 
                     <div class="row">
-                        <table class="table" style="margin:20px">
+                        <table id="tabla" class="table" style="margin:20px">
                             <thead class="table-primary">
                                 <tr>
                                     <th scope="col">Id</th>
@@ -168,4 +168,23 @@
         </section>
     @endif
 
+@endsection
+
+@section('js')
+    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/datatables.min.js') }}"></script>
+    <script src="{{ asset('js/dataTables.bootstrap5.min.js') }}"></script>
+    <script>
+        new DataTable('#tabla', {
+            language: {
+                info: 'Mostrando página _PAGE_ de _PAGES_',
+                infoEmpty: 'No hay registros disponibles',
+                infoFiltered: '(filtrados de _MAX_ registros totales)',
+                lengthMenu: 'Mostrar _MENU_ registros por página',
+                zeroRecords: 'No se encontraron datos',
+                search: 'Buscar',
+                emptyTable: 'No hay datos en la tabla'
+            }
+        });
+    </script>
 @endsection

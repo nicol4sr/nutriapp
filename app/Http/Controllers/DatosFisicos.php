@@ -17,7 +17,7 @@ class DatosFisicos extends Controller
 
     public function index()
     {
-        $datos = DatoFisico::paginate(15);
+        $datos = DatoFisico::where('usuario_id', '=', auth()->user()->id)->paginate(15);
         $ultimosDatos = DatoFisico::query()->latest()->first();
         return view('datos_fisicos.peso', compact('datos', 'ultimosDatos'));
     }
@@ -25,7 +25,6 @@ class DatosFisicos extends Controller
     public function store(Request $request)
     {
         DatoFisico::create([
-            'altura' => $request->altura,
             'peso' => $request->peso,
             'usuario_id' => auth()->user()->id,
         ]);

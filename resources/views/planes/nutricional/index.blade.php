@@ -11,6 +11,17 @@
             </ol>
         </nav>
     </div><!-- End Page Title -->
+    @if (auth()->user()->hasRole(['Nutricionista', 'Entrenador', 'Administrador']))
+        <section class="section mb-3">
+            <div class="row">
+                <div class="col-lg-8" style="margin:2px">
+                    <a href="{{ route('receta') }}" class="btn btn-primary w-25">
+                        <i class="bi bi-clipboard"> </i>Crear receta
+                    </a>
+                </div>
+            </div>
+        </section>
+    @endif
 
     <section class="section">
         <div class="row">

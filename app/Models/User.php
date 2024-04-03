@@ -27,7 +27,8 @@ class User extends Authenticatable
         'fecha_nacimiento',
         'nacionalidad_id',
         'objetivo_id',
-        'habitos'
+        'habitos',
+        'altura'
     ];
 
     /**

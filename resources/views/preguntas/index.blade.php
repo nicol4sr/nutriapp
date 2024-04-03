@@ -6,15 +6,6 @@
     $tipos = [0 => 'Psicológico', 1 => 'Físico', 2 => 'Calórico'];
 @endphp
 
-@section('js')
-    @if (isset($pregunta))
-        <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
-        <script>
-            $('#btn')[0].click()
-        </script>
-    @endif
-@endsection
-
 @section('content')
     <x-modal id="pregunta" title="Añadir pregunta" :route="isset($pregunta) ? route('preguntas.update', $pregunta) : route('preguntas.store')">
         @if (isset($pregunta))
@@ -85,7 +76,7 @@
             <div class="col-lg-11">
 
                 <div class="row">
-                    <table class="table" style="margin:20px">
+                    <table id="preguntas" class="table" style="margin:20px">
                         <thead class="table-primary">
                             <tr>
                                 <th scope="col">Id</th>
@@ -116,15 +107,33 @@
                     </table>
                     <!-- End Table with stripped rows -->
 
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            {{ $preguntas->links() }}
-                        </ul>
-                    </nav><!-- End Basic Pagination -->
-
                     <!-- </div> -->
                 </div>
             </div>
         </div>
     </section>
+@endsection
+
+@section('js')
+    @if (isset($pregunta))
+        <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+        <script>
+            $('#btn')[0].click()
+        </script>
+    @endif
+    <script src="{{ asset('js/datatables.min.js') }}"></script>
+    <script src="{{ asset('js/dataTables.bootstrap5.min.js') }}"></script>
+    <script>
+        new DataTable('#preguntas', {
+            language: {
+                info: 'Mostrando página _PAGE_ de _PAGES_',
+                infoEmpty: 'No hay registros disponibles',
+                infoFiltered: '(filtrados de _MAX_ registros totales)',
+                lengthMenu: 'Mostrar _MENU_ registros por página',
+                zeroRecords: 'No se encontraron datos',
+                search: 'Buscar',
+                emptyTable: 'No hay datos en la tabla'
+            }
+        });
+    </script>
 @endsection

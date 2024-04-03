@@ -71,6 +71,7 @@ class RegisterController extends Controller
             'nacionalidad' => ['required', 'numeric', 'not_in:0'],
             'objetivo' => ['required', 'numeric', 'not_in:0'],
             'habitos' => ['required', 'numeric', 'between:0,4'],
+            'altura' => ['required', 'numeric'],
         ]);
     }
 
@@ -91,7 +92,8 @@ class RegisterController extends Controller
             'fecha_nacimiento' => Carbon::parse($data['fecha_nacimiento'])->format('Y-m-d'),
             'nacionalidad_id' => $data['nacionalidad'],
             'objetivo_id' => $data['objetivo'],
-            'habitos' => $data['habitos']
+            'habitos' => $data['habitos'],
+            'altura' => $data['altura']
         ])->assignRole($rol);
     }
 }

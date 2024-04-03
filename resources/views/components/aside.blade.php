@@ -15,15 +15,6 @@
             </a>
         </li>
 
-        <!-- Receta -->
-        @if ($usuario->hasRole(['Nutricionista', 'Entrenador', 'Administrador']))
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('receta') }}">
-                    <i class="bi bi-clipboard"></i><span>Crear Receta</span>
-                </a>
-            </li>
-        @endif
-
         <!-- Planes -->
         <li class="nav-item active">
             <a class="nav-link collapsed active" data-bs-target="#components-nav" data-bs-toggle="collapse"
@@ -109,7 +100,7 @@
                         </a>
                     </li>
                 @endif
-                <li class="dropdown-item">
+                {{-- <li class="dropdown-item">
                     <a href="{{ route('entrenador') }}">
                         <i class="bi bi-circle"></i><span class="dropdown-item-color">P.Entrenador</span>
                     </a>
@@ -118,7 +109,7 @@
                     <a href="{{ route('nutricionistas') }}">
                         <i class="bi bi-circle"></i><span class="dropdown-item-color">P.nutricionistas</span>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </li>
 

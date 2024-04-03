@@ -17,7 +17,6 @@ class CreateDatosFisicosTable extends Migration
             $table->id();
             $table->unsignedBigInteger('usuario_id');
             $table->foreign('usuario_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->float('altura');
             $table->integer('peso');
             $table->timestamps();
         });

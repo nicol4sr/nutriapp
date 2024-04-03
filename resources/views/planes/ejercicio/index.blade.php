@@ -32,15 +32,21 @@
     </div><!-- End Page Title -->
 
     @if (auth()->user()->hasRole(['Administrador', 'Entrenador']))
-    <section class="section">
-        <div class="row">
-            <div class="col-lg-8" style="margin:2px">
-                <a href="{{ route('crear-ejercicio') }}" class="btn btn-primary w-25">
-                    <i class="bi bi-star"> </i>Empezar
-                </a>
+        <section class="mb-4 section">
+            <div class="row">
+                <div class="col-lg-8" style="margin:2px">
+                    <a href="{{ route('crear-ejercicio') }}" class="btn btn-primary w-25">
+                        <i class="bi bi-star"> </i>Empezar
+                    </a>
+                </div>
             </div>
+        </section>
+    @endif
+
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
         </div>
-    </section>
     @endif
 
     <section class="mt-3 section">
@@ -78,17 +84,17 @@
                 </div>
             </div>
             @if (auth()->user()->hasRole(['Administrador', 'Entrenador']))
-            <div class="col-lg-4">
-                <div class="card text-white">
-                    <img src="{{ asset('images/exercises/ejer_11.jpg') }}" class="card-img" alt="...">
-                    <div class="card-img-overlay text-center">
-                        <h5 class="card-title text-white text-center">Mis planes</h5>
+                <div class="col-lg-4">
+                    <div class="card text-white">
+                        <img src="{{ asset('images/exercises/ejer_11.jpg') }}" class="card-img" alt="...">
+                        <div class="card-img-overlay text-center">
+                            <h5 class="card-title text-white text-center">Mis planes</h5>
 
-                        <a href="{{ route('ejercicios-personal') }}" type="button"
-                            class="btn btn-primary rounded-pill">Empezar</a>
+                            <a href="{{ route('ejercicios-personal') }}" type="button"
+                                class="btn btn-primary rounded-pill">Empezar</a>
+                        </div>
                     </div>
                 </div>
-            </div>
             @endif
 
     </section>

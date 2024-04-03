@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Models\PartesCuerpo;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreEjercicioRequest extends FormRequest
@@ -24,7 +23,7 @@ class StoreEjercicioRequest extends FormRequest
      */
     public function rules()
     {
-        $partes_cuerpo = PartesCuerpo::count();
+        // $partes_cuerpo = PartesCuerpo::count();
 
         return [
             'nombre' => ['required', 'string'],
@@ -37,7 +36,7 @@ class StoreEjercicioRequest extends FormRequest
             'peso_max' => ['required', 'numeric', 'bail', 'gt:peso_min'],
             'altura_min' => ['required', 'numeric', 'min:0'],
             'altura_max' => ['required', 'numeric', 'bail', 'gt:altura_min'],
-            'parte_cuerpo_id' => ['required', 'numeric', 'not_in:0', 'max:' . $partes_cuerpo],
+            // 'parte_cuerpo_id' => ['required', 'numeric', 'not_in:0', 'max:' . $partes_cuerpo],
         ];
     }
 
@@ -54,7 +53,7 @@ class StoreEjercicioRequest extends FormRequest
             'partes_cuerpos_id.required' => 'El campo es necesario',
             'partes_cuerpos_id.numeric' => 'La opción seleccionada debe ser válida',
             'partes_cuerpos_id.not_in' => 'La opción seleccionada es inválida',
-            'partes_cuerpos_id.max' => 'La opción seleccionada no se encuentra disponible',
+            // 'partes_cuerpos_id.max' => 'La opción seleccionada no se encuentra disponible',
         ];
     }
 }

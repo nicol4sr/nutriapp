@@ -58,7 +58,7 @@ class EjercicioSeeder extends Seeder
             $ejercicio['peso_max'] = rand($ejercicio['peso_min'], 130);
             $ejercicio['genero'] = rand(0, 1);
             $ejercicio['dificultad'] = rand(0, 2);
-            $ejercicio['parte_cuerpo_id'] = rand(1, 9);
+            // $ejercicio['parte_cuerpo_id'] = rand(1, 9);
             $ejercicio['usuario_id'] = 1;
             Ejercicio::create($ejercicio);
         }

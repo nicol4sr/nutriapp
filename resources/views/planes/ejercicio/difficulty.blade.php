@@ -48,21 +48,35 @@
                     </div>
                     <div class="card-body p-4">
                         <h5 class="pt-0 card-title">{{ $generos[$ejercicio->genero] }}</h5>
-                        <p class="card-text">{{ $ejercicio->descripcion }}</p>
-                    </div>
-                    <div class="card-footer text-muted">
-                        Para personas entre {{ $ejercicio->edad_min }} y {{ $ejercicio->edad_max }} años con un IMC de
-                        {{ $imc_max }}
-                        a
-                        {{ $imc_min }}
+                        <p class="mb-5 card-text">{{ $ejercicio->descripcion }}</p>
+                        @if (!empty($ejercicio->ejercicio_partes))
+                            <ul class="list-group">
+                                @foreach ($ejercicio->ejercicio_partes as $cuerpo)
+                                    <li class="list-group-item">
+                                        <div class="d-flex flex-column gap-3">
+                                            <p>{{ $cuerpo->partes->nombre }}</p>
+                                            <p>{{ $cuerpo->descripcion }}</p>
+                                        </div>
+
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
                     </div>
                 </div>
-            @endforeach
+                <div class="card-footer text-muted">
+                    Para personas entre {{ $ejercicio->edad_min }} y {{ $ejercicio->edad_max }} años con un IMC de
+                    {{ $imc_max }}
+                    a
+                    {{ $imc_min }}
+                </div>
+        </div>
+        @endforeach
 
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    {{ $ejercicios->links() }}
-                </ul>
-            </nav>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {{ $ejercicios->links() }}
+            </ul>
+        </nav>
     </section>
 @endsection

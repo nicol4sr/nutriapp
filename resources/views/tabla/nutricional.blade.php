@@ -45,11 +45,6 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination">
-                                    {{ $referencias->links() }}
-                                </ul>
-                            </nav>
                         </div>
                     </div>
                 </div>
@@ -60,3 +55,21 @@
 
 @endsection
 
+@section('js')
+    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/datatables.min.js') }}"></script>
+    <script src="{{ asset('js/dataTables.bootstrap5.min.js') }}"></script>
+    <script>
+        new DataTable('#valor', {
+            language: {
+                info: 'Mostrando página _PAGE_ de _PAGES_',
+                infoEmpty: 'No hay registros disponibles',
+                infoFiltered: '(filtrados de _MAX_ registros totales)',
+                lengthMenu: 'Mostrar _MENU_ registros por página',
+                zeroRecords: 'No se encontraron datos',
+                search: 'Buscar',
+                emptyTable: 'No hay datos en la tabla'
+            }
+        });
+    </script>
+@endsection

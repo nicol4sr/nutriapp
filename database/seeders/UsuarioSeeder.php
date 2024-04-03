@@ -35,6 +35,7 @@ class UsuarioSeeder extends Seeder
             'nacionalidad_id' => nacionalidades::inRandomOrder()->first()->id,
             'objetivo_id' => Tipo::inRandomOrder()->first()->id,
             'habitos' => rand(0, 4),
+            'altura' => rand(1.6, 2.2),
         ])->assignRole($admin);
 
         // ENTRENADOR
@@ -47,6 +48,7 @@ class UsuarioSeeder extends Seeder
             'nacionalidad_id' => nacionalidades::inRandomOrder()->first()->id,
             'objetivo_id' => Tipo::inRandomOrder()->first()->id,
             'habitos' => rand(0, 4),
+            'altura' => rand(1.6, 2.2),
         ])->assignRole($entrenador);
 
         // NUTRICIONISTA
@@ -59,6 +61,7 @@ class UsuarioSeeder extends Seeder
             'nacionalidad_id' => nacionalidades::inRandomOrder()->first()->id,
             'objetivo_id' => Tipo::inRandomOrder()->first()->id,
             'habitos' => rand(0, 4),
+            'altura' => rand(1.6, 2.2),
         ])->assignRole($nutricionista);
 
         // PSICOLOGO
@@ -71,6 +74,7 @@ class UsuarioSeeder extends Seeder
             'nacionalidad_id' => nacionalidades::inRandomOrder()->first()->id,
             'objetivo_id' => Tipo::inRandomOrder()->first()->id,
             'habitos' => rand(0, 4),
+            'altura' => rand(1.6, 2.2),
         ])->assignRole($psicologo);
 
         // USUARIO
@@ -83,6 +87,7 @@ class UsuarioSeeder extends Seeder
             'nacionalidad_id' => nacionalidades::inRandomOrder()->first()->id,
             'objetivo_id' => Tipo::inRandomOrder()->first()->id,
             'habitos' => rand(0, 4),
+            'altura' => rand(1.6, 2.2),
         ])->assignRole($usuario);
 
         $respuestas = [

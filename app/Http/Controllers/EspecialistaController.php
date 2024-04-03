@@ -67,7 +67,7 @@ class EspecialistaController extends Controller
 
     public function pending()
     {
-        $especialistas = Especialista::paginate(15);
+        $especialistas = Especialista::all();
         return view('especialista.pending', compact('especialistas'));
     }
 }

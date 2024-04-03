@@ -27,8 +27,8 @@
 
     <div class="col-12 card table-responsive-sm p-3 my-3">
 
-        <div class="w-100 row mx-auto">
-            <div class="col-md-3 col-sm-12">
+        <div class="row">
+            <div class="col-md-4 col-sm-12">
                 <a href="{{ route('guardar-respaldo') }}" class="btn btn-block btn-success my-2">
                     <i class="bis bi-save mr-2"></i>
                     {{ 'Copia de seguridad' }}
@@ -65,4 +65,23 @@
             </tbody>
         </table>
     </div>
+@endsection
+
+@section('js')
+    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/datatables.min.js') }}"></script>
+    <script src="{{ asset('js/dataTables.bootstrap5.min.js') }}"></script>
+    <script>
+        new DataTable('#tabla', {
+            language: {
+                info: 'Mostrando página _PAGE_ de _PAGES_',
+                infoEmpty: 'No hay registros disponibles',
+                infoFiltered: '(filtrados de _MAX_ registros totales)',
+                lengthMenu: 'Mostrar _MENU_ registros por página',
+                zeroRecords: 'No se encontraron datos',
+                search: 'Buscar',
+                emptyTable: 'No hay datos en la tabla'
+            }
+        });
+    </script>
 @endsection

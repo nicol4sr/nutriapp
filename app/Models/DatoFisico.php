@@ -10,5 +10,5 @@ class DatoFisico extends Model
     use HasFactory;
 
     protected $table = 'datos_fisicos';
-    protected $fillable = ['altura', 'peso', 'usuario_id'];
+    protected $fillable = ['peso', 'usuario_id'];
 }

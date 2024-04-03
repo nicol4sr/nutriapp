@@ -188,50 +188,31 @@
                             @csrf
                             <div class="mx-auto">
                                 <div class="row px-2">
-                                    <div class="col-6">
-                                        <div class="row mb-3 justify-content-center ">
-                                            <label for="inputText" class="text-center">Altura</label>
-                                            <div class="col-lg-8">
-                                                <div class="input-group">
+                                    <div class="col-6 mx-auto">
 
-                                                    <input type="number" id="altura-datos" name="altura" step="0.01"
-                                                        class="form-control @error('altura') is-invalid @enderror"
-                                                        placeholder="Ej: 2,28" value="{{ old('altura') }}">
-
-                                                    @error('altura')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
                                         <div class="row mb-3 justify-content-center ">
                                             <label for="inputText" class="text-center">Peso</label>
-                                            <div class="col-lg-8">
-                                                <div class="input-group">
+                                            <div class="input-group">
 
-                                                    <input type="number" name="peso"
-                                                        class="form-control @error('peso') is-invalid @enderror"
-                                                        placeholder="Ej: 80" value="{{ old('peso') }}">
+                                                <input type="number" name="peso"
+                                                    class="form-control @error('peso') is-invalid @enderror"
+                                                    placeholder="Ej: 80" value="{{ old('peso') }}">
 
-                                                    @error('peso')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
+                                                @error('peso')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
+                                        </div>
+                                        <div class="row w-fit mb-3 text-center">
+                                            <button type="submit"
+                                                class="btn btn-primary btn-block w-100 mx-auto">Crear</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="row w-fit mb-3 text-center">
-                                <button type="submit" class="btn btn-primary btn-block w-75 mx-auto">Crear</button>
-                            </div>
                         </form>
                     </div>
                 </div>
@@ -263,8 +244,8 @@
                     <i class="bi bi-download"> </i>Descargar pdf</button>
                 </button> --}}
                 <!-- <a href="{{ route('datos-fisicos.pdf') }}" class="btn btn-primary">
-                    <i class="bi bi-download"> </i>Descargar pdf</button>
-                </a> -->
+                                    <i class="bi bi-download"> </i>Descargar pdf</button>
+                                </a> -->
             </div>
 
             <section class="section">
