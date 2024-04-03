@@ -18,7 +18,6 @@ class ConfiguracionController extends Controller
         // Valida la autenticación
         $this->middleware('auth');
         $this->middleware('prevent-back-history');
-        $this->middleware('check_user_answer_data_form');
     }
 
     static function conversor($tamano)
@@ -32,14 +31,14 @@ class ConfiguracionController extends Controller
     {
         $respaldos = [];
         $disco = Storage::disk('local');
-        $archivos = $disco->files('laravel-backup');
+        $archivos = $disco->files('Nutriapp');
 
         foreach ($archivos as $i => $archivo) {
-            $fecha = Str::substr($archivo, 15, 19);
+            $fecha = Str::substr($archivo, 9, 19);
 
             $respaldos[$i] = [
                 'indice' => ++$i,
-                'nombre' => Str::substr($archivo, 15),
+                'nombre' => $fecha,
                 'fecha' => Carbon::createFromFormat('Y-m-d-H-i-s', $fecha)->format('d/m/Y - h:i a'),
                 'peso' => $this->conversor($disco->size($archivo))
             ];
@@ -51,7 +50,8 @@ class ConfiguracionController extends Controller
     public function guardar()
     {
         try {
-            Artisan::call('backup:run --only-db');
+            Artisan::call('backup:run --only-db --disable-notifications');
+            // Artisan::call('mysqldump --add-drop-table -e --no-tablespaces -u root -p -h 127.0.0.1 nutriapp > ./test.sql');
 
             return redirect()->back()->with('success', 'La base de datos ha sido exportada satisfactoriamente.');
         } catch (Exception $e) {
@@ -62,7 +62,7 @@ class ConfiguracionController extends Controller
 
     public function descargar($nombre_archivo)
     {
-        $archivo = "laravel-backup/" . config('local/laravel-backup') . $nombre_archivo;
+        $archivo = "Nutriapp/" . config('local/Nutriapp') . $nombre_archivo . '.zip';
         $disco = Storage::disk('local');
 
         if ($disco->exists($archivo)) {

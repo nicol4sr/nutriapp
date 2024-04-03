@@ -25,19 +25,6 @@ class UsuarioSeeder extends Seeder
         $psicologo = Role::where('name', '=', 'Psicologo')->first();
         $usuario = Role::where('name', '=', 'Usuario')->first();
 
-        // REVISAR
-        // SISTEMA
-        User::create([
-            'name' => 'Sistema',
-            'email' => 'sistem_admin@email.com',
-            'password' => bcrypt('admin'),
-            'genero' => 0,
-            'fecha_nacimiento' => '01/02/1999',
-            'nacionalidad_id' => nacionalidades::inRandomOrder()->first()->id,
-            'objetivo_id' => Tipo::inRandomOrder()->first()->id,
-            'habitos' => rand(0, 4),
-        ])->assignRole($admin);
-
         // ADMIN
         User::create([
             'name' => 'Admin',
@@ -119,7 +106,7 @@ class UsuarioSeeder extends Seeder
         ];
 
         $preguntas = Pregunta::pluck('id');
-        $usuario = User::find(6);
+        $usuario = User::where('email', '=', 'usuario@email.com')->first();
         foreach ($preguntas as $i) {
             DatosUsuario::create([
                 'respuesta' => $respuestas[$i],

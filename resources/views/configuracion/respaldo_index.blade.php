@@ -7,6 +7,24 @@
         <h1>Respaldo base de datos</h1>
     </div><!-- End Page Title -->
 
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    @if (session('noExiste'))
+        <div class="alert alert-danger">
+            {{ session('noExiste') }}
+        </div>
+    @endif
+
     <div class="col-12 card table-responsive-sm p-3 my-3">
 
         <div class="w-100 row mx-auto">

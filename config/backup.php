@@ -79,6 +79,11 @@ return [
              *
              * For a complete list of available customization options, see https://github.com/spatie/db-dumper
              */
+            'mysql'=> [
+                'dump' => [
+                    'dump_binary_path' => env('DB_MYSQLDUMP_PATH'),
+                ],
+            ],
             'databases' => [
                 'mysql',
             ],

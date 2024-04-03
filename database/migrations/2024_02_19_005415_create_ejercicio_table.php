@@ -16,7 +16,7 @@ class CreateEjercicioTable extends Migration
         Schema::create('ejercicio', function (Blueprint $table) {
             $table->id();
             $table->string("nombre");
-            $table->string("descripcion");
+            $table->text("descripcion");
             $table->integer('dificultad');
             $table->boolean("genero");
             $table->integer("edad_min");

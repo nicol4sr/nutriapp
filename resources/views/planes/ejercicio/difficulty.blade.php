@@ -49,7 +49,6 @@
                     <div class="card-body p-4">
                         <h5 class="pt-0 card-title">{{ $generos[$ejercicio->genero] }}</h5>
                         <p class="card-text">{{ $ejercicio->descripcion }}</p>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                     </div>
                     <div class="card-footer text-muted">
                         Para personas entre {{ $ejercicio->edad_min }} y {{ $ejercicio->edad_max }} años con un IMC de

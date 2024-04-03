@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEjercicioRequest;
+use App\Models\User;
 use App\Models\Ejercicio;
 use App\Models\PartesCuerpo;
 use Illuminate\Support\Facades\Auth;
@@ -31,12 +32,11 @@ class EjercicioController extends Controller
             return redirect('/ejercicios');
         }
 
-        $ejercicios = Ejercicio::join('users', 'users.id', '=', 'ejercicio.usuario_id')
-            ->join('rols', 'rols.id', '=', 'users.rol_id')
+        $ejercicios = User::role(['Administrador', 'Entrenador'])
+            ->join('ejercicio', 'ejercicio.usuario_id', '=', 'users.id')
             ->where('dificultad', '=', $dificultades[$difficulty])
             ->where('usuario_id', '!=', auth()->user()->id)
-            ->whereIn('rol', ['Administrador', 'Entrenador'])
-            ->select('ejercicio.id', 'nombre', 'descripcion', 'dificultad', 'genero', 'edad_min', 'edad_max', 'peso_min', 'peso_max', 'altura_min', 'altura_max', 'parte_cuerpo_id', 'ejercicio.created_at')
+            ->select('ejercicio.id', 'nombre', 'descripcion', 'dificultad', 'ejercicio.genero', 'edad_min', 'edad_max', 'peso_min', 'peso_max', 'altura_min', 'altura_max', 'parte_cuerpo_id', 'ejercicio.created_at')
             ->paginate(15);
 
         return view('planes.ejercicio.difficulty', compact('ejercicios', 'difficulty'));
@@ -44,8 +44,12 @@ class EjercicioController extends Controller
 
     public function personal()
     {
-        $usuario_id = auth()->id();
-        $ejercicios = Ejercicio::where('usuario_id', '=', $usuario_id)->paginate(15);
+        $usuario = auth()->user();
+        $id = $usuario->id;
+        if (!$usuario->hasRole(['Administrador', 'Entrenador'])) {
+            return back();
+        }
+        $ejercicios = Ejercicio::where('usuario_id', '=', $id)->paginate(15);
 
         return view('planes.ejercicio.difficulty', compact('ejercicios'));
     }

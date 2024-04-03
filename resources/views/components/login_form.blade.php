@@ -30,7 +30,7 @@
                 <div class="card mb-3">
                     <div class="d-flex justify-content-center">
                         <div class="pt-4 logo d-flex flex-column align-items-center">
-                            <img src="/images/icons/icon.png" alt="">
+                            <img src="{{ asset('/images/icons/icon.png') }}" alt="">
                             <h5 class="text-center" style="color: #22A7EA">
                                 Iniciar sesión
                             </h5>

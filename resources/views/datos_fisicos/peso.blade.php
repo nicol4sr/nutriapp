@@ -262,9 +262,9 @@
                 <button id="det" class="btn btn-primary">
                     <i class="bi bi-download"> </i>Descargar pdf</button>
                 </button> --}}
-                <a href="{{ route('datos-fisicos.pdf') }}" class="btn btn-primary">
+                <!-- <a href="{{ route('datos-fisicos.pdf') }}" class="btn btn-primary">
                     <i class="bi bi-download"> </i>Descargar pdf</button>
-                </a>
+                </a> -->
             </div>
 
             <section class="section">

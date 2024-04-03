@@ -58,6 +58,10 @@ class EspecialistaController extends Controller
     {
         $validar = $especialista->validado;
         $especialista->update(['validado' => $validar === 0 ? 1 : 0]);
+
+        $especializaciones = [0 => 'Entrenador', 1 => 'Psicologo', 2 => 'Nutricionista'];
+        $usuario = $especialista->usuario;
+        $usuario->syncRoles($especializaciones[$especialista->especialidad]);
         return redirect('/especialistas');
     }
 

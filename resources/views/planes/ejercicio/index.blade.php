@@ -31,6 +31,7 @@
         </nav>
     </div><!-- End Page Title -->
 
+    @if (auth()->user()->hasRole(['Administrador', 'Entrenador']))
     <section class="section">
         <div class="row">
             <div class="col-lg-8" style="margin:2px">
@@ -40,6 +41,7 @@
             </div>
         </div>
     </section>
+    @endif
 
     <section class="mt-3 section">
         <div class="row">
@@ -75,6 +77,7 @@
                     </div>
                 </div>
             </div>
+            @if (auth()->user()->hasRole(['Administrador', 'Entrenador']))
             <div class="col-lg-4">
                 <div class="card text-white">
                     <img src="{{ asset('images/exercises/ejer_11.jpg') }}" class="card-img" alt="...">
@@ -86,6 +89,7 @@
                     </div>
                 </div>
             </div>
+            @endif
 
     </section>
 @endsection

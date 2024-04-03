@@ -11,9 +11,9 @@ use App\Http\Controllers\EjercicioController;
 use App\Http\Controllers\DatosFisicos;
 use App\Http\Controllers\EspecialistaController;
 use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\ReferenciaController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\PreguntasController;
+use App\Http\Controllers\NutricionalController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -31,10 +31,9 @@ use Illuminate\Support\Facades\Route;
 // ---------------------------------------------------------------------------------
 //                                  REVISAR
 // ---------------------------------------------------------------------------------
-Route::get('/tabla', [ReferenciaController::class, 'index'])
+Route::get('/tabla', [NutricionalController::class, 'datos'])
     ->name('valor_nutricional')
     ->middleware('check_user_answer_data_form');
-
 // ---------------------------------------------------------------------------------
 //                                  Inicio
 // ---------------------------------------------------------------------------------

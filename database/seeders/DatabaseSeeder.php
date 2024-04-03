@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
             GrupoMuscularSeeder::class,
             PlanesAlimenticiosSeeder::class,
             PartesCuerpoSeeder::class,
+            EjercicioSeeder::class,
+            
         ]);
     }
 }
